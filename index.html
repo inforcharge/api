@@ -253,14 +253,13 @@
       </ul>
         <ul class="toc-footer">
             <li><a href='https://solmate.cc'>Solmate Home</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Solmate API! You can use our API to access Solmate API endpoints, which can CRUD orders, webhook in our database.</p>
+<p>Welcome to the Solmate API! You can use our API to access Solmate AD endpoints.</p>
 
 <p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 <h1 id='authentication'>Authentication</h1>
@@ -288,7 +287,6 @@
   <span class="nb">puts</span> <span class="s2">"HTTP Request failed (</span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="si">}</span><span class="s2">)"</span>
 <span class="k">end</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-
 
 <span class="k">def</span> <span class="nf">send_request</span><span class="p">():</span>
     <span class="c"># Request</span>
@@ -332,7 +330,11 @@ curl <span class="s2">"https://api.solmate.cc/v2/"</span> <span class="se">\</sp
 <p>Make sure to replace <code>Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl</code> with your API key.</p>
 </blockquote>
 
-<p>Solmate uses HTTP Basic Auth to allow access to the API.</p>
+<p>Solmate uses HTTP Basic Auth to allow access to the API. We will give you account and password like:</p>
+
+<p><strong>account:api@solmate.cc</strong></p>
+
+<p><strong>password:IloveSolmate</strong></p>
 
 <p>Solmate expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
 
@@ -354,7 +356,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
   <span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_PEER</span>
   <span class="n">dict</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">"title"</span> <span class="o">=&gt;</span> <span class="s2">"淘米-賽爾號星戰再起"</span><span class="p">,</span>
-            <span class="s2">"network"</span> <span class="o">=&gt;</span> <span class="s2">"VIESHOW"</span><span class="p">,</span>
+            <span class="s2">"network"</span> <span class="o">=&gt;</span> <span class="s2">"vieshow"</span><span class="p">,</span>
             <span class="s2">"model"</span> <span class="o">=&gt;</span> <span class="s2">"CPM"</span><span class="p">,</span>
             <span class="s2">"total_budget"</span> <span class="o">=&gt;</span> <span class="s2">"20000"</span><span class="p">,</span>
             <span class="s2">"daily_budget"</span> <span class="o">=&gt;</span> <span class="s2">"2000"</span><span class="p">,</span>
@@ -396,7 +398,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
             <span class="p">},</span>
             <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
                 <span class="s">"title"</span><span class="p">:</span> <span class="s">"淘米-賽爾號星戰再起"</span><span class="p">,</span>
-                <span class="s">"network"</span><span class="p">:</span> <span class="s">"VIESHOW"</span><span class="p">,</span>
+                <span class="s">"network"</span><span class="p">:</span> <span class="s">"vieshow"</span><span class="p">,</span>
                 <span class="s">"total_budget"</span><span class="p">:</span> <span class="s">"20000"</span><span class="p">,</span>
                 <span class="s">"daily_budget"</span><span class="p">:</span> <span class="s">"2000"</span><span class="p">,</span>
                 <span class="s">"material_url"</span><span class="p">:</span> <span class="s">"https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"</span>
@@ -419,7 +421,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
      -u <span class="s1">'api@solmate.cc:Ilovesolmate'</span> <span class="se">\</span>
      -d <span class="s1">$'{
   "title": "淘米-賽爾號星戰再起",
-  "network": "VIESHOW",
+  "network": "vieshow",
   "model": "CPM",
   "total_budget": "20000",
   "daily_budget": "2000",
@@ -439,7 +441,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
     <span class="na">contentType</span><span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>
     <span class="na">data</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
         <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"淘米-賽爾號星戰再起"</span><span class="p">,</span>
-        <span class="s2">"network"</span><span class="p">:</span> <span class="s2">"VIESHOW"</span><span class="p">,</span>
+        <span class="s2">"network"</span><span class="p">:</span> <span class="s2">"vieshow"</span><span class="p">,</span>
         <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"CPM"</span><span class="p">,</span>
         <span class="s2">"total_budget"</span><span class="p">:</span> <span class="s2">"20000"</span><span class="p">,</span>
         <span class="s2">"daily_budget"</span><span class="p">:</span> <span class="s2">"2000"</span><span class="p">,</span>
@@ -465,12 +467,10 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"102341285566"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"model should not be empty"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -487,52 +487,52 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </thead><tbody>
 <tr>
 <td>title</td>
-<td>(must have)</td>
+<td>required</td>
 <td>AD title</td>
 </tr>
 <tr>
 <td>network</td>
-<td>(must have)</td>
-<td><code>VIESHOW</code>, <code>SALON</code>, <code>COFFEE_RESTAURANT</code></td>
+<td>required</td>
+<td><code>vieshow</code>, <code>salon</code>, <code>coffee_restaurant</code></td>
 </tr>
 <tr>
 <td>model</td>
-<td>(must have)</td>
+<td>required</td>
 <td><code>CPM</code>, <code>CPV</code></td>
 </tr>
 <tr>
 <td>total_budget</td>
-<td>(must have)</td>
+<td>required</td>
 <td>must larger than 0</td>
 </tr>
 <tr>
 <td>daily_budget</td>
-<td>(must have)</td>
+<td>required</td>
 <td>must larger than 0</td>
 </tr>
 <tr>
 <td>material_url</td>
-<td>(must have)</td>
+<td>required</td>
 <td>material url link like, https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4</td>
 </tr>
 <tr>
 <td>click_url</td>
-<td>(must have)</td>
+<td>required</td>
 <td>click material url link like, https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg</td>
 </tr>
 <tr>
 <td>display_time</td>
-<td>(optional)</td>
+<td>optional</td>
 <td>default is 30 seconds.</td>
 </tr>
 <tr>
 <td>gender</td>
-<td>(optional)</td>
-<td>Empty string is no limit. <code>MALE</code>, <code>FEMALE</code></td>
+<td>optional</td>
+<td>Empty string is no limit. <code>male</code>, <code>female</code></td>
 </tr>
 <tr>
 <td>districts</td>
-<td>(optional)</td>
+<td>optional</td>
 <td>Empty array is no limit. <ul><li>台北中山大同</li><li>台北信義安和</li><li>台北信義市府</li><li>台北南京八德</li><li>台北士林天母</li><li>台北大直內湖</li><li>台北師大公館</li><li>台北忠孝東路</li><li>台北木柵政大</li><li>台北東門永康</li><li>台北松江南京</li><li>台北民生民權</li><li>台北永春南港</li><li>台北西門艋舺</li><li>新北三重蘆洲</li><li>新北中和永和</li><li>新北新莊泰山</li><li>新北板橋土城</li><li>新北汐止車站</li><li>桃園中壢市區</li><li>新竹市區</li><li>台中市區</li><li>台南市區</li><li>高雄市區</li><li>台北景美新店</li><li>新竹車站市區</li><li>苗栗頭份市區</li><li>桃園車站市區</li><li>台北中正站前</li><li>宜蘭車站市區</li><li>屏東市區</li><li>其他</li></ul></td>
 </tr>
 </tbody></table>
@@ -662,18 +662,14 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"102341285566"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"model should not be empty"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint update a specific order.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>PUT https://api.solmate.cc/v2/orders/&lt;ID&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
@@ -698,41 +694,153 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </thead><tbody>
 <tr>
 <td>total_budget</td>
-<td>(must have)</td>
+<td>required</td>
 <td>must larger than 0</td>
 </tr>
 <tr>
 <td>daily_budget</td>
-<td>(must have)</td>
+<td>required</td>
 <td>must larger than 0</td>
 </tr>
 <tr>
 <td>material_url</td>
-<td>(must have)</td>
+<td>required</td>
 <td>material url link like, https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4</td>
 </tr>
 <tr>
 <td>click_url</td>
-<td>(must have)</td>
+<td>required</td>
 <td>click material url link like, https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg</td>
 </tr>
 <tr>
 <td>display_time</td>
-<td>(optional)</td>
+<td>optional</td>
 <td>default is 30 seconds.</td>
 </tr>
 <tr>
 <td>gender</td>
-<td>(optional)</td>
-<td>Empty string is no limit. <code>MALE</code>, <code>FEMALE</code></td>
+<td>optional</td>
+<td>Empty string is no limit. <code>male</code>, <code>female</code></td>
 </tr>
 <tr>
 <td>districts</td>
-<td>(optional)</td>
+<td>optional</td>
 <td>Empty array is no limit. <ul><li>台北中山大同</li><li>台北信義安和</li><li>台北信義市府</li><li>台北南京八德</li><li>台北士林天母</li><li>台北大直內湖</li><li>台北師大公館</li><li>台北忠孝東路</li><li>台北木柵政大</li><li>台北東門永康</li><li>台北松江南京</li><li>台北民生民權</li><li>台北永春南港</li><li>台北西門艋舺</li><li>新北三重蘆洲</li><li>新北中和永和</li><li>新北新莊泰山</li><li>新北板橋土城</li><li>新北汐止車站</li><li>桃園中壢市區</li><li>新竹市區</li><li>台中市區</li><li>台南市區</li><li>高雄市區</li><li>台北景美新店</li><li>新竹車站市區</li><li>苗栗頭份市區</li><li>桃園車站市區</li><li>台北中正站前</li><li>宜蘭車站市區</li><li>屏東市區</li><li>其他</li></ul></td>
 </tr>
 </tbody></table>
-<h2 id='get-order-status'>Get Order Status</h2><h2 id='update-order-status'>Update Order Status</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<h2 id='get-order-status'>Get Order Status</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'net/https'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="k">def</span> <span class="nf">send_request</span>
+  <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'https://api.solmate.cc/v2/orders/102341285566/status'</span><span class="p">)</span>
+
+  <span class="c1"># Create client</span>
+  <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+  <span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_PEER</span>
+  <span class="n">dict</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">dict</span><span class="p">)</span>
+
+  <span class="c1"># Create Request</span>
+  <span class="n">req</span> <span class="o">=</span>  <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+  <span class="c1"># Add headers</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">add_field</span> <span class="s2">"Authorization"</span><span class="p">,</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span>
+  <span class="c1"># Add headers</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">add_field</span> <span class="s2">"Content-Type"</span><span class="p">,</span> <span class="s2">"application/json; charset=utf-8"</span>
+  <span class="c1"># Set body</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="n">body</span>
+
+  <span class="c1"># Fetch Request</span>
+  <span class="n">res</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Response HTTP Status Code: </span><span class="si">#{</span><span class="n">res</span><span class="p">.</span><span class="nf">code</span><span class="si">}</span><span class="s2">"</span>
+  <span class="nb">puts</span> <span class="s2">"Response HTTP Response Body: </span><span class="si">#{</span><span class="n">res</span><span class="p">.</span><span class="nf">body</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">rescue</span> <span class="no">StandardError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="nb">puts</span> <span class="s2">"HTTP Request failed (</span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="si">}</span><span class="s2">)"</span>
+<span class="k">end</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">def</span> <span class="nf">send_request</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">url</span><span class="o">=</span><span class="s">"https://api.solmate.cc/v2/orders/102341285566/status"</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+                <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+                <span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json; charset=utf-8"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+
+            <span class="p">})</span>
+        <span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Status Code: {status_code}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">status_code</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Response Body: {content}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'HTTP Request failed'</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.solmate.cc/v2/orders/102341285566/status"</span> <span class="se">\</span>
+     -H <span class="s1">'Content-Type: application/json; charset=utf-8'</span> <span class="se">\</span>
+     -u <span class="s1">'api@solmate.cc:Ilovesolmate'</span> <span class="se">\</span>
+     -d <span class="s1">$'{}'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">jQuery</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s2">"https://api.solmate.cc/v2/orders/102341285566/status"</span><span class="p">,</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"Authorization"</span><span class="p">:</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+        <span class="s2">"Content-Type"</span><span class="p">:</span> <span class="s2">"application/json; charset=utf-8"</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">jqXHR</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"HTTP Request Succeeded: "</span> <span class="o">+</span> <span class="nx">jqXHR</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">jqXHR</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">errorThrown</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"HTTP Request Failed"</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">always</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="cm">/* ... */</span>
+<span class="p">});</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Running"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Wrong AD id"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint get a specific order status.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET https://api.solmate.cc/v2/orders/&lt;ID&gt;/status</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the order</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td><ul><li>Running</li><li>Limit By Budget</li><li>Error</li><li>Stop</li></ul></td>
+</tr>
+</tbody></table>
+<h2 id='update-order-status'>Update Order Status</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
 <span class="nb">require</span> <span class="s1">'net/https'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
@@ -745,7 +853,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
   <span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
   <span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_PEER</span>
   <span class="n">dict</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">"action"</span> <span class="o">=&gt;</span> <span class="s2">"pause"</span>
+            <span class="s2">"action"</span> <span class="o">=&gt;</span> <span class="s2">"Pause"</span>
         <span class="p">}</span>
   <span class="n">body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">dict</span><span class="p">)</span>
 
@@ -777,7 +885,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
                 <span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json; charset=utf-8"</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
-                <span class="s">"action"</span><span class="p">:</span> <span class="s">"pause"</span>
+                <span class="s">"action"</span><span class="p">:</span> <span class="s">"Pause"</span>
             <span class="p">})</span>
         <span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Status Code: {status_code}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -791,7 +899,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
      -H <span class="s1">'Content-Type: application/json; charset=utf-8'</span> <span class="se">\</span>
      -u <span class="s1">'api@solmate.cc:Ilovesolmate'</span> <span class="se">\</span>
      -d <span class="s1">$'{
-  "action": "pause"
+  "action": "Pause"
 }'</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">jQuery</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
     <span class="na">url</span><span class="p">:</span> <span class="s2">"https://api.solmate.cc/v2/orders/102341285566/status"</span><span class="p">,</span>
@@ -803,7 +911,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
     <span class="p">},</span>
     <span class="na">contentType</span><span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>
     <span class="na">data</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-        <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"pause"</span>
+        <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"Pause"</span>
     <span class="p">})</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">jqXHR</span><span class="p">)</span> <span class="p">{</span>
@@ -821,18 +929,17 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+  </span><span class="s2">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Stop"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"status can't be changed"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint deletes a specific order.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>PUT https://api.solmate.cc/v2/orders/&lt;ID&gt;/status</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<h3 id='url-parameters-3'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -854,8 +961,8 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </thead><tbody>
 <tr>
 <td>action</td>
-<td>(must have)</td>
-<td><code>pause</code>, <code>resume</code></td>
+<td>required</td>
+<td><code>Pause</code>, <code>Resume</code></td>
 </tr>
 </tbody></table>
 <h2 id='delete-a-specific-order'>Delete a Specific Order</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
@@ -937,18 +1044,18 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"102341285566"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"deleted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ID is not found"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint deletes a specific order.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='http-request-5'>HTTP Request</h3>
 <p><code>DELETE https://api.solmate.cc/v2/orders/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-3'>URL Parameters</h3>
+<h3 id='url-parameters-4'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -962,10 +1069,10 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </tbody></table>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+Solmate uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted, a charge failed, etc.). Codes in the 5xx range indicate an error with Solmate's servers (these are rare).
 </aside>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>The Solmate API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -975,43 +1082,31 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
+<td>Bad Request -- The request was unacceptable, often due to missing a required parameter.</td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>Unauthorized -- No valid API key provided.</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+<td>402</td>
+<td>Request Faile -- The parameters were valid but the request failed.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
+<td>Not Found -- The requested resource doesn&#39;t exist.</td>
 </tr>
 <tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
+<td>409</td>
+<td>Conflict -- The request conflicts with another request (perhaps due to using the same idempotent key).</td>
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests -- Too many requests hit the API too quickly. We recommend an exponential backoff of your requests.</td>
 </tr>
 <tr>
 <td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+<td>Internal Server Error -- Something went wrong on Solmate&#39;s end. (These are rare.)</td>
 </tr>
 <tr>
 <td>503</td>
