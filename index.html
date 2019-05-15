@@ -931,6 +931,38 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <td><ul><li>Running</li><li>Waiting</li><li>Limit By Budget</li><li>Error</li><li>Stop</li></ul></td>
 </tr>
 </tbody></table>
+<h3 id='status-description'>Status Description</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Running</td>
+<td>廣告播放中</td>
+</tr>
+<tr>
+<td>Limit By Budget</td>
+<td>每日預算已消耗完</td>
+</tr>
+<tr>
+<td>Pending</td>
+<td>等待審核</td>
+</tr>
+<tr>
+<td>Waiting</td>
+<td>廣告開始時間尚未到</td>
+</tr>
+<tr>
+<td>Stop</td>
+<td>暫停</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>廣告設定錯誤, 或是退審</td>
+</tr>
+</tbody></table>
 <h2 id='update-order-status'>Update Order Status</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
 <span class="nb">require</span> <span class="s1">'net/https'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
