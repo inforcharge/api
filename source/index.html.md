@@ -133,13 +133,17 @@ def send_request
             "title" => "淘米-賽爾號星戰再起",
             "network" => "vieshow",
             "model" => "CPM",
+            "start_at" => "2019-03-10 13:00",
+            "end_at" => "2019-05-10 21:00",
             "total_budget" => "20000",
             "daily_budget" => "2000",
             "material_url" => "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"
             "click_url" => "https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg",
+            "sessions" => ["Morning", "Evening"],
             "display_time" => "30",
             "gender" => "",
             "districts" => ["台北信義市府", "台北士林天母"],
+            "hourly_notification" => "https://notification.clickforce.com.tw/api/solmate"
         }
   body = JSON.dump(dict)
 
@@ -177,14 +181,18 @@ def send_request():
             data=json.dumps({
                 "title": "淘米-賽爾號星戰再起",
                 "network": "vieshow",
+                "model": "CPM",
+                "start_at": "2019-03-10 13:00",
+                "end_at": "2019-05-10 21:00",
                 "total_budget": "20000",
                 "daily_budget": "2000",
                 "material_url": "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"
                 "click_url": "https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg",
-                "model": "CPM",
+                "sessions": ["Morning", "Evening"],
                 "display_time": "30",
                 "gender": "",
                 "districts": ["台北信義市府", "台北士林天母"],
+                "hourly_notification": "https://notification.clickforce.com.tw/api/solmate"
             })
         )
         print('Response HTTP Status Code: {status_code}'.format(
@@ -204,13 +212,17 @@ curl -X "POST" "https://api.solmate.cc/v2/orders" \
   "title": "淘米-賽爾號星戰再起",
   "network": "vieshow",
   "model": "CPM",
+  "start_at": "2019-03-10 13:00",
+  "end_at": "2019-05-10 21:00",
   "total_budget": "20000",
   "daily_budget": "2000",
   "material_url": "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"
   "click_url": "https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg",
+  "sessions": ["Morning", "Evening"],
   "display_time": "30",
   "gender": "",
   "districts": ["台北信義市府", "台北士林天母"],
+  "hourly_notification": "https://notification.clickforce.com.tw/api/solmate"
 }'
 ```
 
@@ -227,13 +239,17 @@ jQuery.ajax({
         "title": "淘米-賽爾號星戰再起",
         "network": "vieshow",
         "model": "CPM",
+        "start_at": "2019-03-10 13:00",
+        "end_at": "2019-05-10 21:00",
         "total_budget": "20000",
         "daily_budget": "2000",
         "material_url": "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"
         "click_url": "https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg",
+        "sessions" => ["Morning", "Evening"],
         "display_time": "30",
         "gender": "",
         "districts": ["台北信義市府", "台北士林天母"],
+        "hourly_notification": "https://notification.clickforce.com.tw/api/solmate"
     })
 })
 .done(function(data, textStatus, jqXHR) {
@@ -273,13 +289,26 @@ Parameter | Default | Description
 title | required | AD title
 network | required | `vieshow`, `salon`, `coffee_restaurant`
 model | required | `CPM`, `CPV`
+start_at | required | We use UTC+8 with ISO 8601 formats like '%Y-%m-%d %H:%M', `2019-05-12 12:10`
+end_at | required | We use UTC+8 with ISO 8601 formats like '%Y-%m-%d %H:%M', `2019-06-30 23:59`
 total_budget | required | must larger than 0
 daily_budget | required | must larger than 0
 material_url | required | material url link like, https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4
 click_url | required | click material url link like, https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg
+sessions | optional | Empty array is no limit or you could use multiple selection like `Morning`, `Afternoon`, `Evening`.
 display_time | optional | default is 30 seconds.
 gender | optional | Empty string is no limit. `male`, `female`
 districts | optional | Empty array is no limit. <ul><li>台北中山大同</li><li>台北信義安和</li><li>台北信義市府</li><li>台北南京八德</li><li>台北士林天母</li><li>台北大直內湖</li><li>台北師大公館</li><li>台北忠孝東路</li><li>台北木柵政大</li><li>台北東門永康</li><li>台北松江南京</li><li>台北民生民權</li><li>台北永春南港</li><li>台北西門艋舺</li><li>新北三重蘆洲</li><li>新北中和永和</li><li>新北新莊泰山</li><li>新北板橋土城</li><li>新北汐止車站</li><li>桃園中壢市區</li><li>新竹市區</li><li>台中市區</li><li>台南市區</li><li>高雄市區</li><li>台北景美新店</li><li>新竹車站市區</li><li>苗栗頭份市區</li><li>桃園車站市區</li><li>台北中正站前</li><li>宜蘭車站市區</li><li>屏東市區</li><li>其他</li></ul>
+hourly_notification | optional | The URL of the webhook endpoint, Solmate will post orders data hourly. More information you could see <a href="#notification">Notification</a>
+daily_notification | optional | The URL of the webhook endpoint, Solmate will post orders data daily. More information you could see <a href="#notification">Notification</a>
+
+
+### Sessions Parameters
+| Name  | Range  |
+| ------------ | ------------ |
+| Morning  | 07:00 - 12:00  |
+| Afternoon   | 12:00 - 18:00  |
+| Evening   | 18:00 - 23:00  |
 
 
 ## Update a Specific Order
@@ -445,13 +474,18 @@ ID | The ID of the order to retrieve
 
 Parameter | Default | Description
 --------- | ------- | -----------
+start_at | required | We use UTC+8 with ISO 8601 formats like '%Y-%m-%d %H:%M', `2019-05-12 12:10`
+end_at | required | We use UTC+8 with ISO 8601 formats like '%Y-%m-%d %H:%M', `2019-06-30 23:59`
 total_budget | required | must larger than 0
 daily_budget | required | must larger than 0
 material_url | required | material url link like, https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4
 click_url | required | click material url link like, https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg
+sessions | optional | Empty array is no limit or you could use multiple selection like `Morning`, `Afternoon`, `Evening`.
 display_time | optional | default is 30 seconds.
 gender | optional | Empty string is no limit. `male`, `female`
 districts | optional | Empty array is no limit. <ul><li>台北中山大同</li><li>台北信義安和</li><li>台北信義市府</li><li>台北南京八德</li><li>台北士林天母</li><li>台北大直內湖</li><li>台北師大公館</li><li>台北忠孝東路</li><li>台北木柵政大</li><li>台北東門永康</li><li>台北松江南京</li><li>台北民生民權</li><li>台北永春南港</li><li>台北西門艋舺</li><li>新北三重蘆洲</li><li>新北中和永和</li><li>新北新莊泰山</li><li>新北板橋土城</li><li>新北汐止車站</li><li>桃園中壢市區</li><li>新竹市區</li><li>台中市區</li><li>台南市區</li><li>高雄市區</li><li>台北景美新店</li><li>新竹車站市區</li><li>苗栗頭份市區</li><li>桃園車站市區</li><li>台北中正站前</li><li>宜蘭車站市區</li><li>屏東市區</li><li>其他</li></ul>
+hourly_notification | optional | The URL of the webhook endpoint, Solmate will post orders data hourly.
+daily_notification | optional | The URL of the webhook endpoint, Solmate will post orders data daily.
 
 
 ## Get Order Status
@@ -811,3 +845,49 @@ This endpoint deletes a specific order.
 Parameter | Description
 --------- | -----------
 ID | The ID of the order to delete
+
+# Notification
+
+```json
+{
+  "id": "102341285566",
+  "impression": 30254,
+  "click": 710,
+  "clickthrough_rate": 0.37,
+  "view": 1939,
+  "view_rate": 0.08,
+  "male": 198,
+  "female": 469,
+  "unknown": 1272,
+  "age_18_24": 322,
+  "age_25_34": 297,
+  "age_35_44": 36,
+  "age_45_54": 11,
+  "age_55_64": 1,
+  "age_65": 0
+}
+```
+
+The notification object includes following attributes.
+
+### Notification object attributes
+
+Attribute Name | Description
+--------- | -----------
+id | The ID of the order
+impression | How many times your video thumbnails were shown to viewers.
+click | show you the number of times people clicked on your video.
+clickthrough_rate | the number of clicks that your ad receives divided by the number of times your ad is shown.
+view | show the number of times people watched video ad.
+view_rate | shows you the number of views divided by the number of times your ad is shown
+male | how many male people watched video ad.
+female | how many female people watched video ad.
+age_18_24 | how many people age between 18 ~ 24 watched video ad.
+age_25_34 | how many people age between 25 ~ 34 watched video ad.
+age_35_44 | how many people age between 35 ~ 44 watched video ad.
+age_45_54 | how many people age between 45 ~ 54 watched video ad.
+age_65 | how many people age over 65 watched video ad.
+25% view | TBD
+50% view | TBD
+75% view | TBD
+100% view | TBD
