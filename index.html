@@ -373,7 +373,8 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
             <span class="s2">"display_time"</span> <span class="o">=&gt;</span> <span class="s2">"30"</span><span class="p">,</span>
             <span class="s2">"gender"</span> <span class="o">=&gt;</span> <span class="s2">""</span><span class="p">,</span>
             <span class="s2">"districts"</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">"台北信義市府"</span><span class="p">,</span> <span class="s2">"台北士林天母"</span><span class="p">],</span>
-            <span class="s2">"hourly_notification"</span> <span class="o">=&gt;</span> <span class="s2">"https://notification.clickforce.com.tw/api/solmate"</span>
+            <span class="s2">"hourly_notification"</span> <span class="o">=&gt;</span> <span class="s2">"https://notification.clickforce.com.tw/api/solmate"</span><span class="p">,</span>
+            <span class="s2">"daily_notification"</span> <span class="o">=&gt;</span> <span class="s2">""</span><span class="p">,</span>
         <span class="p">}</span>
   <span class="n">body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">dict</span><span class="p">)</span>
 
@@ -419,7 +420,8 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
                 <span class="s">"display_time"</span><span class="p">:</span> <span class="s">"30"</span><span class="p">,</span>
                 <span class="s">"gender"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
                 <span class="s">"districts"</span><span class="p">:</span> <span class="p">[</span><span class="s">"台北信義市府"</span><span class="p">,</span> <span class="s">"台北士林天母"</span><span class="p">],</span>
-                <span class="s">"hourly_notification"</span><span class="p">:</span> <span class="s">"https://notification.clickforce.com.tw/api/solmate"</span>
+                <span class="s">"hourly_notification"</span><span class="p">:</span> <span class="s">"https://notification.clickforce.com.tw/api/solmate"</span><span class="p">,</span>
+                <span class="s">"daily_notification"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
             <span class="p">})</span>
         <span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Status Code: {status_code}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -446,7 +448,8 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
   "display_time": "30",
   "gender": "",
   "districts": ["台北信義市府", "台北士林天母"],
-  "hourly_notification": "https://notification.clickforce.com.tw/api/solmate"
+  "hourly_notification": "https://notification.clickforce.com.tw/api/solmate",
+  "daily_notification": "",
 }'</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">jQuery</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
     <span class="na">url</span><span class="p">:</span> <span class="s2">"https://api.solmate.cc/v2/orders"</span><span class="p">,</span>
@@ -470,7 +473,8 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
         <span class="s2">"display_time"</span><span class="p">:</span> <span class="s2">"30"</span><span class="p">,</span>
         <span class="s2">"gender"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
         <span class="s2">"districts"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"台北信義市府"</span><span class="p">,</span> <span class="s2">"台北士林天母"</span><span class="p">],</span>
-        <span class="s2">"hourly_notification"</span><span class="p">:</span> <span class="s2">"https://notification.clickforce.com.tw/api/solmate"</span>
+        <span class="s2">"hourly_notification"</span><span class="p">:</span> <span class="s2">"https://notification.clickforce.com.tw/api/solmate"</span><span class="p">,</span>
+        <span class="s2">"daily_notification"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
     <span class="p">})</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">jqXHR</span><span class="p">)</span> <span class="p">{</span>
@@ -519,7 +523,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <tr>
 <td>network</td>
 <td>required</td>
-<td><code>vieshow</code>, <code>salon</code>, <code>coffee_restaurant</code></td>
+<td><code>vieshow</code>, <code>salon</code>, <code>live</code></td>
 </tr>
 <tr>
 <td>model</td>
@@ -585,6 +589,26 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <td>daily_notification</td>
 <td>optional</td>
 <td>The URL of the webhook endpoint, Solmate will post orders data daily. More information you could see <a href="#notification">Notification</a></td>
+</tr>
+</tbody></table>
+<h3 id='network-parameters'>Network Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vieshow</td>
+<td>威秀聯播網</td>
+</tr>
+<tr>
+<td>salon</td>
+<td>美髮聯播網</td>
+</tr>
+<tr>
+<td>live</td>
+<td>餐廳咖啡廳聯播網 (包含區域特色店家 etc)</td>
 </tr>
 </tbody></table>
 <h3 id='sessions-parameters'>Sessions Parameters</h3>
