@@ -248,6 +248,14 @@
               </ul>
           </li>
           <li>
+            <a href="#notification" class="toc-h1 toc-link" data-title="Notification">Notification</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#notification-object-attributes" class="toc-h2 toc-link" data-title="Notification object attributes">Notification object attributes</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -358,13 +366,17 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
             <span class="s2">"title"</span> <span class="o">=&gt;</span> <span class="s2">"淘米-賽爾號星戰再起"</span><span class="p">,</span>
             <span class="s2">"network"</span> <span class="o">=&gt;</span> <span class="s2">"vieshow"</span><span class="p">,</span>
             <span class="s2">"model"</span> <span class="o">=&gt;</span> <span class="s2">"CPM"</span><span class="p">,</span>
+            <span class="s2">"start_at"</span> <span class="o">=&gt;</span> <span class="s2">"2019-03-10 13:00"</span><span class="p">,</span>
+            <span class="s2">"end_at"</span> <span class="o">=&gt;</span> <span class="s2">"2019-05-10 21:00"</span><span class="p">,</span>
             <span class="s2">"total_budget"</span> <span class="o">=&gt;</span> <span class="s2">"20000"</span><span class="p">,</span>
             <span class="s2">"daily_budget"</span> <span class="o">=&gt;</span> <span class="s2">"2000"</span><span class="p">,</span>
             <span class="s2">"material_url"</span> <span class="o">=&gt;</span> <span class="s2">"https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"</span>
             <span class="s2">"click_url"</span> <span class="o">=&gt;</span> <span class="s2">"https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg"</span><span class="p">,</span>
+            <span class="s2">"sessions"</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">"Morning"</span><span class="p">,</span> <span class="s2">"Evening"</span><span class="p">],</span>
             <span class="s2">"display_time"</span> <span class="o">=&gt;</span> <span class="s2">"30"</span><span class="p">,</span>
             <span class="s2">"gender"</span> <span class="o">=&gt;</span> <span class="s2">""</span><span class="p">,</span>
             <span class="s2">"districts"</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">"台北信義市府"</span><span class="p">,</span> <span class="s2">"台北士林天母"</span><span class="p">],</span>
+            <span class="s2">"hourly_notification"</span> <span class="o">=&gt;</span> <span class="s2">"https://notification.clickforce.com.tw/api/solmate"</span>
         <span class="p">}</span>
   <span class="n">body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">dict</span><span class="p">)</span>
 
@@ -399,14 +411,18 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
             <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
                 <span class="s">"title"</span><span class="p">:</span> <span class="s">"淘米-賽爾號星戰再起"</span><span class="p">,</span>
                 <span class="s">"network"</span><span class="p">:</span> <span class="s">"vieshow"</span><span class="p">,</span>
+                <span class="s">"model"</span><span class="p">:</span> <span class="s">"CPM"</span><span class="p">,</span>
+                <span class="s">"start_at"</span><span class="p">:</span> <span class="s">"2019-03-10 13:00"</span><span class="p">,</span>
+                <span class="s">"end_at"</span><span class="p">:</span> <span class="s">"2019-05-10 21:00"</span><span class="p">,</span>
                 <span class="s">"total_budget"</span><span class="p">:</span> <span class="s">"20000"</span><span class="p">,</span>
                 <span class="s">"daily_budget"</span><span class="p">:</span> <span class="s">"2000"</span><span class="p">,</span>
                 <span class="s">"material_url"</span><span class="p">:</span> <span class="s">"https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"</span>
                 <span class="s">"click_url"</span><span class="p">:</span> <span class="s">"https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg"</span><span class="p">,</span>
-                <span class="s">"model"</span><span class="p">:</span> <span class="s">"CPM"</span><span class="p">,</span>
+                <span class="s">"sessions"</span><span class="p">:</span> <span class="p">[</span><span class="s">"Morning"</span><span class="p">,</span> <span class="s">"Evening"</span><span class="p">],</span>
                 <span class="s">"display_time"</span><span class="p">:</span> <span class="s">"30"</span><span class="p">,</span>
                 <span class="s">"gender"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
                 <span class="s">"districts"</span><span class="p">:</span> <span class="p">[</span><span class="s">"台北信義市府"</span><span class="p">,</span> <span class="s">"台北士林天母"</span><span class="p">],</span>
+                <span class="s">"hourly_notification"</span><span class="p">:</span> <span class="s">"https://notification.clickforce.com.tw/api/solmate"</span>
             <span class="p">})</span>
         <span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Status Code: {status_code}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -423,13 +439,17 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
   "title": "淘米-賽爾號星戰再起",
   "network": "vieshow",
   "model": "CPM",
+  "start_at": "2019-03-10 13:00",
+  "end_at": "2019-05-10 21:00",
   "total_budget": "20000",
   "daily_budget": "2000",
   "material_url": "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"
   "click_url": "https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg",
+  "sessions": ["Morning", "Evening"],
   "display_time": "30",
   "gender": "",
   "districts": ["台北信義市府", "台北士林天母"],
+  "hourly_notification": "https://notification.clickforce.com.tw/api/solmate"
 }'</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">jQuery</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
     <span class="na">url</span><span class="p">:</span> <span class="s2">"https://api.solmate.cc/v2/orders"</span><span class="p">,</span>
@@ -443,13 +463,17 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
         <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"淘米-賽爾號星戰再起"</span><span class="p">,</span>
         <span class="s2">"network"</span><span class="p">:</span> <span class="s2">"vieshow"</span><span class="p">,</span>
         <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"CPM"</span><span class="p">,</span>
+        <span class="s2">"start_at"</span><span class="p">:</span> <span class="s2">"2019-03-10 13:00"</span><span class="p">,</span>
+        <span class="s2">"end_at"</span><span class="p">:</span> <span class="s2">"2019-05-10 21:00"</span><span class="p">,</span>
         <span class="s2">"total_budget"</span><span class="p">:</span> <span class="s2">"20000"</span><span class="p">,</span>
         <span class="s2">"daily_budget"</span><span class="p">:</span> <span class="s2">"2000"</span><span class="p">,</span>
         <span class="s2">"material_url"</span><span class="p">:</span> <span class="s2">"https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"</span>
         <span class="s2">"click_url"</span><span class="p">:</span> <span class="s2">"https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg"</span><span class="p">,</span>
+        <span class="s2">"sessions"</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">"Morning"</span><span class="p">,</span> <span class="s2">"Evening"</span><span class="p">],</span>
         <span class="s2">"display_time"</span><span class="p">:</span> <span class="s2">"30"</span><span class="p">,</span>
         <span class="s2">"gender"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
         <span class="s2">"districts"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"台北信義市府"</span><span class="p">,</span> <span class="s2">"台北士林天母"</span><span class="p">],</span>
+        <span class="s2">"hourly_notification"</span><span class="p">:</span> <span class="s2">"https://notification.clickforce.com.tw/api/solmate"</span>
     <span class="p">})</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">jqXHR</span><span class="p">)</span> <span class="p">{</span>
@@ -501,6 +525,16 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <td><code>CPM</code>, <code>CPV</code></td>
 </tr>
 <tr>
+<td>start_at</td>
+<td>required</td>
+<td>We use UTC+8 with ISO 8601 formats like &#39;%Y-%m-%d %H:%M&#39;, <code>2019-05-12 12:10</code></td>
+</tr>
+<tr>
+<td>end_at</td>
+<td>required</td>
+<td>We use UTC+8 with ISO 8601 formats like &#39;%Y-%m-%d %H:%M&#39;, <code>2019-06-30 23:59</code></td>
+</tr>
+<tr>
 <td>total_budget</td>
 <td>required</td>
 <td>must larger than 0</td>
@@ -521,6 +555,11 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <td>click material url link like, https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg</td>
 </tr>
 <tr>
+<td>sessions</td>
+<td>optional</td>
+<td>Empty array is no limit or you could use multiple selection like <code>Morning</code>, <code>Afternoon</code>, <code>Evening</code>.</td>
+</tr>
+<tr>
 <td>display_time</td>
 <td>optional</td>
 <td>default is 30 seconds.</td>
@@ -534,6 +573,36 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <td>districts</td>
 <td>optional</td>
 <td>Empty array is no limit. <ul><li>台北中山大同</li><li>台北信義安和</li><li>台北信義市府</li><li>台北南京八德</li><li>台北士林天母</li><li>台北大直內湖</li><li>台北師大公館</li><li>台北忠孝東路</li><li>台北木柵政大</li><li>台北東門永康</li><li>台北松江南京</li><li>台北民生民權</li><li>台北永春南港</li><li>台北西門艋舺</li><li>新北三重蘆洲</li><li>新北中和永和</li><li>新北新莊泰山</li><li>新北板橋土城</li><li>新北汐止車站</li><li>桃園中壢市區</li><li>新竹市區</li><li>台中市區</li><li>台南市區</li><li>高雄市區</li><li>台北景美新店</li><li>新竹車站市區</li><li>苗栗頭份市區</li><li>桃園車站市區</li><li>台北中正站前</li><li>宜蘭車站市區</li><li>屏東市區</li><li>其他</li></ul></td>
+</tr>
+<tr>
+<td>hourly_notification</td>
+<td>optional</td>
+<td>The URL of the webhook endpoint, Solmate will post orders data hourly. More information you could see <a href="#notification">Notification</a></td>
+</tr>
+<tr>
+<td>daily_notification</td>
+<td>optional</td>
+<td>The URL of the webhook endpoint, Solmate will post orders data daily. More information you could see <a href="#notification">Notification</a></td>
+</tr>
+</tbody></table>
+<h3 id='sessions-parameters'>Sessions Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Morning</td>
+<td>07:00 - 12:00</td>
+</tr>
+<tr>
+<td>Afternoon</td>
+<td>12:00 - 18:00</td>
+</tr>
+<tr>
+<td>Evening</td>
+<td>18:00 - 23:00</td>
 </tr>
 </tbody></table>
 <h2 id='update-a-specific-order'>Update a Specific Order</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
@@ -693,6 +762,16 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </tr>
 </thead><tbody>
 <tr>
+<td>start_at</td>
+<td>required</td>
+<td>We use UTC+8 with ISO 8601 formats like &#39;%Y-%m-%d %H:%M&#39;, <code>2019-05-12 12:10</code></td>
+</tr>
+<tr>
+<td>end_at</td>
+<td>required</td>
+<td>We use UTC+8 with ISO 8601 formats like &#39;%Y-%m-%d %H:%M&#39;, <code>2019-06-30 23:59</code></td>
+</tr>
+<tr>
 <td>total_budget</td>
 <td>required</td>
 <td>must larger than 0</td>
@@ -713,6 +792,11 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <td>click material url link like, https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg</td>
 </tr>
 <tr>
+<td>sessions</td>
+<td>optional</td>
+<td>Empty array is no limit or you could use multiple selection like <code>Morning</code>, <code>Afternoon</code>, <code>Evening</code>.</td>
+</tr>
+<tr>
 <td>display_time</td>
 <td>optional</td>
 <td>default is 30 seconds.</td>
@@ -726,6 +810,16 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <td>districts</td>
 <td>optional</td>
 <td>Empty array is no limit. <ul><li>台北中山大同</li><li>台北信義安和</li><li>台北信義市府</li><li>台北南京八德</li><li>台北士林天母</li><li>台北大直內湖</li><li>台北師大公館</li><li>台北忠孝東路</li><li>台北木柵政大</li><li>台北東門永康</li><li>台北松江南京</li><li>台北民生民權</li><li>台北永春南港</li><li>台北西門艋舺</li><li>新北三重蘆洲</li><li>新北中和永和</li><li>新北新莊泰山</li><li>新北板橋土城</li><li>新北汐止車站</li><li>桃園中壢市區</li><li>新竹市區</li><li>台中市區</li><li>台南市區</li><li>高雄市區</li><li>台北景美新店</li><li>新竹車站市區</li><li>苗栗頭份市區</li><li>桃園車站市區</li><li>台北中正站前</li><li>宜蘭車站市區</li><li>屏東市區</li><li>其他</li></ul></td>
+</tr>
+<tr>
+<td>hourly_notification</td>
+<td>optional</td>
+<td>The URL of the webhook endpoint, Solmate will post orders data hourly.</td>
+</tr>
+<tr>
+<td>daily_notification</td>
+<td>optional</td>
+<td>The URL of the webhook endpoint, Solmate will post orders data daily.</td>
 </tr>
 </tbody></table>
 <h2 id='get-order-status'>Get Order Status</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
@@ -1065,6 +1159,101 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <tr>
 <td>ID</td>
 <td>The ID of the order to delete</td>
+</tr>
+</tbody></table>
+<h1 id='notification'>Notification</h1><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"102341285566"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"impression"</span><span class="p">:</span><span class="w"> </span><span class="mi">30254</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"click"</span><span class="p">:</span><span class="w"> </span><span class="mi">710</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"clickthrough_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.37</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"view"</span><span class="p">:</span><span class="w"> </span><span class="mi">1939</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"view_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.08</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"male"</span><span class="p">:</span><span class="w"> </span><span class="mi">198</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"female"</span><span class="p">:</span><span class="w"> </span><span class="mi">469</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"unknown"</span><span class="p">:</span><span class="w"> </span><span class="mi">1272</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"age_18_24"</span><span class="p">:</span><span class="w"> </span><span class="mi">322</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"age_25_34"</span><span class="p">:</span><span class="w"> </span><span class="mi">297</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"age_35_44"</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"age_45_54"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"age_55_64"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"age_65"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The notification object includes following attributes.</p>
+<h3 id='notification-object-attributes'>Notification object attributes</h3>
+<table><thead>
+<tr>
+<th>Attribute Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of the order</td>
+</tr>
+<tr>
+<td>impression</td>
+<td>How many times your video thumbnails were shown to viewers.</td>
+</tr>
+<tr>
+<td>click</td>
+<td>show you the number of times people clicked on your video.</td>
+</tr>
+<tr>
+<td>clickthrough_rate</td>
+<td>the number of clicks that your ad receives divided by the number of times your ad is shown.</td>
+</tr>
+<tr>
+<td>view</td>
+<td>show the number of times people watched video ad.</td>
+</tr>
+<tr>
+<td>view_rate</td>
+<td>shows you the number of views divided by the number of times your ad is shown</td>
+</tr>
+<tr>
+<td>male</td>
+<td>how many male people watched video ad.</td>
+</tr>
+<tr>
+<td>female</td>
+<td>how many female people watched video ad.</td>
+</tr>
+<tr>
+<td>age_18_24</td>
+<td>how many people age between 18 ~ 24 watched video ad.</td>
+</tr>
+<tr>
+<td>age_25_34</td>
+<td>how many people age between 25 ~ 34 watched video ad.</td>
+</tr>
+<tr>
+<td>age_35_44</td>
+<td>how many people age between 35 ~ 44 watched video ad.</td>
+</tr>
+<tr>
+<td>age_45_54</td>
+<td>how many people age between 45 ~ 54 watched video ad.</td>
+</tr>
+<tr>
+<td>age_65</td>
+<td>how many people age over 65 watched video ad.</td>
+</tr>
+<tr>
+<td>25% view</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>50% view</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>75% view</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>100% view</td>
+<td>TBD</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
