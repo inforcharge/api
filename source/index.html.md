@@ -53,9 +53,6 @@ end
 import requests
 
 def send_request():
-    # Request
-    # GET https://echo.paw.cloud/
-
     try:
         response = requests.get(
             url="https://api.solmate.cc/v2/",
@@ -101,9 +98,9 @@ jQuery.ajax({
 
 Solmate uses HTTP Basic Auth to allow access to the API. We will give you account and password like:
 
-**account:api@solmate.cc**
+account:**api@solmate.cc**
 
-**password:IloveSolmate**
+password:**IloveSolmate**
 
 Solmate expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
@@ -137,13 +134,14 @@ def send_request
             "end_at" => "2019-05-10 21:00",
             "total_budget" => "20000",
             "daily_budget" => "2000",
-            "material_url" => "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"
+            "material_url" => "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4",
             "click_url" => "https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg",
             "sessions" => ["Morning", "Evening"],
             "display_time" => "30",
             "gender" => "",
             "districts" => ["台北信義市府", "台北士林天母"],
-            "hourly_notification" => "https://notification.clickforce.com.tw/api/solmate"
+            "hourly_notification" => "https://notification.clickforce.com.tw/api/solmate",
+            "daily_notification" => "",
         }
   body = JSON.dump(dict)
 
@@ -186,13 +184,14 @@ def send_request():
                 "end_at": "2019-05-10 21:00",
                 "total_budget": "20000",
                 "daily_budget": "2000",
-                "material_url": "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"
+                "material_url": "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4",
                 "click_url": "https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg",
                 "sessions": ["Morning", "Evening"],
                 "display_time": "30",
                 "gender": "",
                 "districts": ["台北信義市府", "台北士林天母"],
-                "hourly_notification": "https://notification.clickforce.com.tw/api/solmate"
+                "hourly_notification": "https://notification.clickforce.com.tw/api/solmate",
+                "daily_notification": "",
             })
         )
         print('Response HTTP Status Code: {status_code}'.format(
@@ -216,13 +215,14 @@ curl -X "POST" "https://api.solmate.cc/v2/orders" \
   "end_at": "2019-05-10 21:00",
   "total_budget": "20000",
   "daily_budget": "2000",
-  "material_url": "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"
+  "material_url": "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4",
   "click_url": "https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg",
   "sessions": ["Morning", "Evening"],
   "display_time": "30",
   "gender": "",
   "districts": ["台北信義市府", "台北士林天母"],
-  "hourly_notification": "https://notification.clickforce.com.tw/api/solmate"
+  "hourly_notification": "https://notification.clickforce.com.tw/api/solmate",
+  "daily_notification": "",
 }'
 ```
 
@@ -243,13 +243,14 @@ jQuery.ajax({
         "end_at": "2019-05-10 21:00",
         "total_budget": "20000",
         "daily_budget": "2000",
-        "material_url": "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4"
+        "material_url": "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4",
         "click_url": "https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg",
-        "sessions" => ["Morning", "Evening"],
+        "sessions": ["Morning", "Evening"],
         "display_time": "30",
         "gender": "",
         "districts": ["台北信義市府", "台北士林天母"],
-        "hourly_notification": "https://notification.clickforce.com.tw/api/solmate"
+        "hourly_notification": "https://notification.clickforce.com.tw/api/solmate",
+        "daily_notification": "",
     })
 })
 .done(function(data, textStatus, jqXHR) {
@@ -266,11 +267,17 @@ jQuery.ajax({
 
 > The above command returns JSON structured like this:
 
+> Success response:
+
 ```json
 {
   "id": "102341285566",
 }
+```
 
+> Failed response:
+
+```json
 {
   "message": "model should not be empty",
 }
@@ -287,7 +294,7 @@ This endpoint creates a new order.
 Parameter | Default | Description
 --------- | ------- | -----------
 title | required | AD title
-network | required | `vieshow`, `salon`, `coffee_restaurant`
+network | required | `vieshow`, `salon`, `live`
 model | required | `CPM`, `CPV`
 start_at | required | We use UTC+8 with ISO 8601 formats like '%Y-%m-%d %H:%M', `2019-05-12 12:10`
 end_at | required | We use UTC+8 with ISO 8601 formats like '%Y-%m-%d %H:%M', `2019-06-30 23:59`
@@ -303,12 +310,176 @@ hourly_notification | optional | The URL of the webhook endpoint, Solmate will p
 daily_notification | optional | The URL of the webhook endpoint, Solmate will post orders data daily. More information you could see <a href="#notification">Notification</a>
 
 
+### Network Parameters
+| Name  | Range  |
+| ------------ | ------------ |
+| vieshow  | 威秀聯播網  |
+| salon   | 美髮聯播網  |
+| live   | 餐廳咖啡廳聯播網 (包含區域特色店家 etc)  |
+
 ### Sessions Parameters
 | Name  | Range  |
 | ------------ | ------------ |
 | Morning  | 07:00 - 12:00  |
 | Afternoon   | 12:00 - 18:00  |
 | Evening   | 18:00 - 23:00  |
+
+
+## Get a Specific Order
+
+```ruby
+require 'net/http'
+require 'net/https'
+require 'json'
+
+def send_request
+  uri = URI('https://api.solmate.cc/v2/orders/102341285566')
+
+  # Create client
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+  dict = {}
+  body = JSON.dump(dict)
+
+  # Create Request
+  req =  Net::HTTP::Get.new(uri)
+  # Add headers
+  req.add_field "Authorization", "Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"
+  # Add headers
+  req.add_field "Content-Type", "application/json; charset=utf-8"
+  # Set body
+  req.body = body
+
+  # Fetch Request
+  res = http.request(req)
+  puts "Response HTTP Status Code: #{res.code}"
+  puts "Response HTTP Response Body: #{res.body}"
+rescue StandardError => e
+  puts "HTTP Request failed (#{e.message})"
+end
+
+```
+
+```python
+import requests
+import json
+
+def send_request():
+    try:
+        response = requests.get(
+            url="https://api.solmate.cc/v2/orders/102341285566",
+            headers={
+                "Authorization": "Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl",
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            data=json.dumps({
+
+            })
+        )
+        print('Response HTTP Status Code: {status_code}'.format(
+            status_code=response.status_code))
+        print('Response HTTP Response Body: {content}'.format(
+            content=response.content))
+    except requests.exceptions.RequestException:
+        print('HTTP Request failed')
+```
+
+```shell
+curl "https://api.solmate.cc/v2/orders/102341285566" \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -u 'api@solmate.cc:Ilovesolmate' \
+     -d $'{}'
+```
+
+```javascript
+jQuery.ajax({
+    url: "https://api.solmate.cc/v2/orders/102341285566",
+    type: "GET",
+    headers: {
+        "Authorization": "Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl",
+        "Content-Type": "application/json; charset=utf-8",
+    },
+})
+.done(function(data, textStatus, jqXHR) {
+    console.log("HTTP Request Succeeded: " + jqXHR.status);
+    console.log(data);
+})
+.fail(function(jqXHR, textStatus, errorThrown) {
+    console.log("HTTP Request Failed");
+})
+.always(function() {
+    /* ... */
+});
+```
+
+> The above command returns JSON structured like this:
+
+> Success response:
+
+```json
+{
+  "id": "102341285566",
+  "title": "淘米-賽爾號星戰再起",
+  "network": "vieshow",
+  "model": "CPM",
+  "start_at": "2019-03-10 13:00",
+  "end_at": "2019-05-10 21:00",
+  "total_budget": "20000",
+  "daily_budget": "2000",
+  "material_url": "https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4",
+  "click_url": "https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg",
+  "sessions": ["Morning", "Evening"],
+  "display_time": "30",
+  "gender": "",
+  "districts": ["台北信義市府", "台北士林天母"],
+  "hourly_notification": "https://notification.clickforce.com.tw/api/solmate",
+  "daily_notification": "",
+}
+```
+
+> Failed response:
+
+```json
+{
+  "message": "AD ID is not found",
+}
+```
+
+This endpoint update a specific order.
+
+### HTTP Request
+
+`GET https://api.solmate.cc/v2/orders/<ID>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the order to retrieve
+
+
+### Response Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the order to retrieve
+title |  AD title
+network | `vieshow`, `salon`, `live`
+model | `CPM`, `CPV`
+start_at | We use UTC+8 with ISO 8601 formats like '%Y-%m-%d %H:%M', `2019-05-12 12:10`
+end_at | We use UTC+8 with ISO 8601 formats like '%Y-%m-%d %H:%M', `2019-06-30 23:59`
+total_budget | must larger than 0
+daily_budget | must larger than 0
+material_url | material url link like, https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4
+click_url | click material url link like, https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg
+sessions | Empty array is no limit or you could use multiple selection like `Morning`, `Afternoon`, `Evening`.
+display_time | default is 30 seconds.
+gender | Empty string is no limit. `male`, `female`
+districts | Empty array is no limit. <ul><li>台北中山大同</li><li>台北信義安和</li><li>台北信義市府</li><li>台北南京八德</li><li>台北士林天母</li><li>台北大直內湖</li><li>台北師大公館</li><li>台北忠孝東路</li><li>台北木柵政大</li><li>台北東門永康</li><li>台北松江南京</li><li>台北民生民權</li><li>台北永春南港</li><li>台北西門艋舺</li><li>新北三重蘆洲</li><li>新北中和永和</li><li>新北新莊泰山</li><li>新北板橋土城</li><li>新北汐止車站</li><li>桃園中壢市區</li><li>新竹市區</li><li>台中市區</li><li>台南市區</li><li>高雄市區</li><li>台北景美新店</li><li>新竹車站市區</li><li>苗栗頭份市區</li><li>桃園車站市區</li><li>台北中正站前</li><li>宜蘭車站市區</li><li>屏東市區</li><li>其他</li></ul>
+hourly_notification | The URL of the webhook endpoint, Solmate will post orders data hourly. More information you could see <a href="#notification">Notification</a>
+daily_notification | The URL of the webhook endpoint, Solmate will post orders data daily. More information you could see <a href="#notification">Notification</a>
+
 
 
 ## Update a Specific Order
@@ -448,11 +619,17 @@ jQuery.ajax({
 
 > The above command returns JSON structured like this:
 
+> Success response:
+
 ```json
 {
   "id": "102341285566",
 }
+```
 
+> Failed response:
+
+```json
 {
   "message": "model should not be empty",
 }
@@ -577,10 +754,17 @@ jQuery.ajax({
 
 > The above command returns JSON structured like this:
 
+> Success response:
+
 ```json
 {
   "status": "Running",
 }
+```
+
+> Failed response:
+
+```json
 
 {
   "message" : "Wrong AD id",
@@ -603,7 +787,18 @@ ID | The ID of the order
 ### Response Parameters
 Parameter | Description
 --------- | -----------
-status | <ul><li>Running</li><li>Limit By Budget</li><li>Error</li><li>Stop</li></ul>
+status | <ul><li>Running</li><li>Waiting</li><li>Limit By Budget</li><li>Error</li><li>Stop</li></ul>
+
+
+### Status Description
+Name | Description
+--------- | -----------
+Running | 廣告播放中
+Limit By Budget | 每日預算已消耗完
+Pending | 等待審核
+Waiting | 廣告開始時間尚未到
+Stop | 暫停
+Error | 廣告設定錯誤, 或是退審
 
 ## Update Order Status
 
@@ -705,11 +900,17 @@ jQuery.ajax({
 
 > The above command returns JSON structured like this:
 
+> Success response:
+
 ```json
 {
   "status" : "Stop"
 }
+```
 
+> Failed response:
+
+```json
 {
   "message" : "status can't be changed",
 }
@@ -823,12 +1024,18 @@ jQuery.ajax({
 
 > The above command returns JSON structured like this:
 
+> Success response:
+
 ```json
 {
   "id": "102341285566",
   "deleted": true
 }
+```
 
+> Failed response:
+
+```json
 {
   "message" : "ID is not found",
 }
@@ -851,6 +1058,10 @@ ID | The ID of the order to delete
 ```json
 {
   "id": "102341285566",
+  "total_budget": 25000,
+  "total_cost": 15566,
+  "daily_budget": 2000,
+  "daily_cost": 1781,
   "impression": 30254,
   "click": 710,
   "clickthrough_rate": 0.37,
@@ -864,7 +1075,7 @@ ID | The ID of the order to delete
   "age_35_44": 36,
   "age_45_54": 11,
   "age_55_64": 1,
-  "age_65": 0
+  "age_65": 0,
 }
 ```
 
@@ -875,18 +1086,22 @@ The notification object includes following attributes.
 Attribute Name | Description
 --------- | -----------
 id | The ID of the order
-impression | How many times your video thumbnails were shown to viewers.
-click | show you the number of times people clicked on your video.
-clickthrough_rate | the number of clicks that your ad receives divided by the number of times your ad is shown.
-view | show the number of times people watched video ad.
-view_rate | shows you the number of views divided by the number of times your ad is shown
-male | how many male people watched video ad.
-female | how many female people watched video ad.
-age_18_24 | how many people age between 18 ~ 24 watched video ad.
-age_25_34 | how many people age between 25 ~ 34 watched video ad.
-age_35_44 | how many people age between 35 ~ 44 watched video ad.
-age_45_54 | how many people age between 45 ~ 54 watched video ad.
-age_65 | how many people age over 65 watched video ad.
+total_budget | An amount that specify the maximum amount of budget spend over the period in which it runs.
+total_cost | An amount that already spend over the period.
+daily_budget | An amount that you set for each ad to spend each day.
+daily_cost | An amount that you already spent each day.
+impression | How many times your ads were shown to viewers.
+click | Show you the number of times people clicked on your video.
+clickthrough_rate | The number of clicks that your ad receives divided by the number of times your ad is shown.
+view | Show the number of times people watched video ad.
+view_rate | Show you the number of views divided by the number of times your ad is shown
+male | How many male people watched video ad.
+female | How many female people watched video ad.
+age_18_24 | How many people age between 18 ~ 24 watched video ad.
+age_25_34 | How many people age between 25 ~ 34 watched video ad.
+age_35_44 | How many people age between 35 ~ 44 watched video ad.
+age_45_54 | How many people age between 45 ~ 54 watched video ad.
+age_65 | How many people age over 65 watched video ad.
 25% view | TBD
 50% view | TBD
 75% view | TBD
