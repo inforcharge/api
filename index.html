@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;,&quot;php&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -215,6 +215,7 @@
               <a href="#" data-language-name="ruby">ruby</a>
               <a href="#" data-language-name="python">python</a>
               <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="php">php</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -241,6 +242,9 @@
                   </li>
                   <li>
                     <a href="#get-order-status" class="toc-h2 toc-link" data-title="Get Order Status">Get Order Status</a>
+                  </li>
+                  <li>
+                    <a href="#get-order-report" class="toc-h2 toc-link" data-title="Get Order Report">Get Order Report</a>
                   </li>
                   <li>
                     <a href="#update-order-status" class="toc-h2 toc-link" data-title="Update Order Status">Update Order Status</a>
@@ -333,6 +337,29 @@ curl <span class="s2">"https://api.solmate.cc/v2/"</span> <span class="se">\</sp
 <span class="p">.</span><span class="nx">always</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="cm">/* ... */</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// Include Guzzle. If using Composer:
+// require 'vendor/autoload.php';
+</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Pool</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Psr7\Request</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span>
+        <span class="s2">"GET"</span><span class="p">,</span>
+        <span class="s2">"https://api.solmate.cc/v2/"</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">"Authorization"</span> <span class="o">=&gt;</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+            <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json; charset=utf-8"</span>
+        <span class="p">],</span>
+        <span class="s2">"{}"</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">"Response HTTP : "</span> <span class="o">.</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span> <span class="o">.</span> <span class="s2">"
+"</span><span class="p">;</span>
 </code></pre>
 <blockquote>
 <p>Make sure to replace <code>Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl</code> with your API key.</p>
@@ -490,6 +517,29 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <span class="p">.</span><span class="nx">always</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="cm">/* ... */</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// Include Guzzle. If using Composer:
+// require 'vendor/autoload.php';
+</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Pool</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Psr7\Request</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span>
+        <span class="s2">"POST"</span><span class="p">,</span>
+        <span class="s2">"https://api.solmate.cc/v2/orders"</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">"Authorization"</span> <span class="o">=&gt;</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+            <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json; charset=utf-8"</span>
+        <span class="p">],</span>
+        <span class="s2">"{\"</span><span class="nx">title\</span><span class="s2">":</span><span class="se">\"\\</span><span class="s2">u6dd8</span><span class="se">\\</span><span class="s2">u7c73-</span><span class="se">\\</span><span class="s2">u8cfd</span><span class="se">\\</span><span class="s2">u723e</span><span class="se">\\</span><span class="s2">u865f</span><span class="se">\\</span><span class="s2">u661f</span><span class="se">\\</span><span class="s2">u6230</span><span class="se">\\</span><span class="s2">u518d</span><span class="se">\\</span><span class="s2">u8d77</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">network</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">vieshow</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">total_budget</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">20000</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">daily_budget</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2000</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">material_url</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">click_url</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">display_time</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">30</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">gender</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">district</span><span class="se">\"</span><span class="s2">:[</span><span class="se">\"\\</span><span class="s2">u53f0</span><span class="se">\\</span><span class="s2">u5317</span><span class="se">\\</span><span class="s2">u58eb</span><span class="se">\\</span><span class="s2">u6797</span><span class="se">\\</span><span class="s2">u5929</span><span class="se">\\</span><span class="s2">u6bcd</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"\\</span><span class="s2">u53f0</span><span class="se">\\</span><span class="s2">u5317</span><span class="se">\\</span><span class="s2">u4fe1</span><span class="se">\\</span><span class="s2">u7fa9</span><span class="se">\\</span><span class="s2">u5e02</span><span class="se">\\</span><span class="s2">u5e9c</span><span class="se">\"</span><span class="s2">],</span><span class="se">\"</span><span class="s2">model</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">CPM</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">start_at</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2019-03-01 12:00</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">end_at</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2019-06-30 23:59</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">sessions</span><span class="se">\"</span><span class="s2">:[</span><span class="se">\"</span><span class="s2">Morning</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">Evening</span><span class="se">\"</span><span class="s2">]}"</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">"Response HTTP : "</span> <span class="o">.</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span> <span class="o">.</span> <span class="s2">"
+"</span><span class="p">;</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -708,6 +758,29 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <span class="p">.</span><span class="nx">always</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="cm">/* ... */</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// Include Guzzle. If using Composer:
+// require 'vendor/autoload.php';
+</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Pool</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Psr7\Request</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span>
+        <span class="s2">"GET"</span><span class="p">,</span>
+        <span class="s2">"https://api.solmate.cc/v2/orders/102341285566"</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">"Authorization"</span> <span class="o">=&gt;</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+            <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json; charset=utf-8"</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">"{}"</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">"Response HTTP : "</span> <span class="o">.</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span> <span class="o">.</span> <span class="s2">"
+"</span><span class="p">;</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -948,6 +1021,29 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <span class="p">.</span><span class="nx">always</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="cm">/* ... */</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// Include Guzzle. If using Composer:
+// require 'vendor/autoload.php';
+</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Pool</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Psr7\Request</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span>
+        <span class="s2">"PUT"</span><span class="p">,</span>
+        <span class="s2">"https://api.solmate.cc/v2/orders/102341285566"</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">"Authorization"</span> <span class="o">=&gt;</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+            <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json; charset=utf-8"</span>
+        <span class="p">],</span>
+        <span class="s2">"</span><span class="si">{</span><span class="nv">\"total_budget\":\"20000\",\"daily_budget\":\"2000\",\"material_url\":\"https://cdn.solmate.cc/uploads/ad/display_file/886/4e144283de.mp4\",\"click_url\":\"https://cdn.solmate.cc/uploads/ad/trigger_file/886/cc68227be5.jpg\",\"display_time\":\"30\",\"gender\":\"\",\"district\":[\"\\u53f0\\u5317\\u58eb\\u6797\\u5929\\u6bcd\",\"\\u53f0\\u5317\\u4fe1\\u7fa9\\u5e02\\u5e9c\"],\"model\":\"CPM\"</span><span class="si">}</span><span class="s2">"</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">"Response HTTP : "</span> <span class="o">.</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span> <span class="o">.</span> <span class="s2">"
+"</span><span class="p">;</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1122,6 +1218,29 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <span class="p">.</span><span class="nx">always</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="cm">/* ... */</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// Include Guzzle. If using Composer:
+// require 'vendor/autoload.php';
+</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Pool</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Psr7\Request</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span>
+        <span class="s2">"GET"</span><span class="p">,</span>
+        <span class="s2">"https://api.solmate.cc/v2/orders/102341285566/status"</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">"Authorization"</span> <span class="o">=&gt;</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+            <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json; charset=utf-8"</span>
+        <span class="p">],</span>
+        <span class="s2">"{}"</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">"Response HTTP : "</span> <span class="o">.</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span> <span class="o">.</span> <span class="s2">"
+"</span><span class="p">;</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1176,11 +1295,11 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </thead><tbody>
 <tr>
 <td>Running</td>
-<td>廣告播放中</td>
+<td>廣告播放中 (正常播放)</td>
 </tr>
 <tr>
 <td>Limit By Budget</td>
-<td>每日預算已消耗完</td>
+<td>每日預算已消耗完, 隔天會自動重啟</td>
 </tr>
 <tr>
 <td>Pending</td>
@@ -1197,6 +1316,267 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <tr>
 <td>Error</td>
 <td>廣告設定錯誤, 或是退審</td>
+</tr>
+</tbody></table>
+<h2 id='get-order-report'>Get Order Report</h2><pre class="highlight ruby tab-ruby"><code><span class="k">def</span> <span class="nf">send_request</span>
+  <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'https://api.solmate.cc/v2/orders/102341285566/reports'</span><span class="p">)</span>
+
+  <span class="c1"># Create client</span>
+  <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+  <span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_PEER</span>
+  <span class="n">dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"start_at"</span> <span class="o">=&gt;</span> <span class="s2">"2019-06-02 13:00:00"</span><span class="p">,</span>
+            <span class="s2">"report_type"</span> <span class="o">=&gt;</span> <span class="s2">"hourly"</span>
+        <span class="p">}</span>
+  <span class="n">body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">dict</span><span class="p">)</span>
+
+  <span class="c1"># Create Request</span>
+  <span class="n">req</span> <span class="o">=</span>  <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+  <span class="c1"># Add headers</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">add_field</span> <span class="s2">"Authorization"</span><span class="p">,</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span>
+  <span class="c1"># Add headers</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">add_field</span> <span class="s2">"Content-Type"</span><span class="p">,</span> <span class="s2">"application/json; charset=utf-8"</span>
+  <span class="c1"># Set body</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="n">body</span>
+
+  <span class="c1"># Fetch Request</span>
+  <span class="n">res</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Response HTTP Status Code: </span><span class="si">#{</span><span class="n">res</span><span class="p">.</span><span class="nf">code</span><span class="si">}</span><span class="s2">"</span>
+  <span class="nb">puts</span> <span class="s2">"Response HTTP Response Body: </span><span class="si">#{</span><span class="n">res</span><span class="p">.</span><span class="nf">body</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">rescue</span> <span class="no">StandardError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="nb">puts</span> <span class="s2">"HTTP Request failed (</span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="si">}</span><span class="s2">)"</span>
+<span class="k">end</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">def</span> <span class="nf">send_request</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">url</span><span class="o">=</span><span class="s">"https://api.solmate.cc/v2/orders/102341285566/reports"</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+                <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+                <span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json; charset=utf-8"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+                <span class="s">"start_at"</span><span class="p">:</span> <span class="s">"2019-06-02 13:00:00"</span><span class="p">,</span>
+                <span class="s">"report_type"</span><span class="p">:</span> <span class="s">"hourly"</span>
+            <span class="p">})</span>
+        <span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Status Code: {status_code}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">status_code</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Response Body: {content}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'HTTP Request failed'</span><span class="p">)</span>
+
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.solmate.cc/v2/orders/102341285566/reports"</span> <span class="se">\</span>
+     -H <span class="s1">'Content-Type: application/json; charset=utf-8'</span> <span class="se">\</span>
+     -u <span class="s1">'api@solmate.cc:Ilovesolmate'</span> <span class="se">\</span>
+     -d <span class="s1">$'{
+  "start_at": "2019-06-02 13:00:00",
+  "report_type": "hourly"
+}'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">jQuery</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s2">"https://api.solmate.cc/v2/orders/102341285566/reports?report_type=hourly&amp;start_at=2019-06-02%2013%3A00"</span><span class="p">,</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"Authorization"</span><span class="p">:</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+        <span class="s2">"Content-Type"</span><span class="p">:</span> <span class="s2">"application/json; charset=utf-8"</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">jqXHR</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"HTTP Request Succeeded: "</span> <span class="o">+</span> <span class="nx">jqXHR</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">jqXHR</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">errorThrown</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"HTTP Request Failed"</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">always</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="cm">/* ... */</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// Include Guzzle. If using Composer:
+// require 'vendor/autoload.php';
+</span><span class="k">use</span> <span class="nx">GuzzleHttp\Pool</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Psr7\Request</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span>
+        <span class="s2">"GET"</span><span class="p">,</span>
+        <span class="s2">"https://api.solmate.cc/v2/orders/102341285566/reports"</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">"Authorization"</span> <span class="o">=&gt;</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+            <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json; charset=utf-8"</span>
+        <span class="p">],</span>
+        <span class="s2">"{\"</span><span class="nx">report_type\</span><span class="s2">":</span><span class="se">\"</span><span class="s2">hourly</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">start_at</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2019-06-02 13:00</span><span class="se">\"</span><span class="s2">}"</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">"Response HTTP : "</span> <span class="o">.</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span> <span class="o">.</span> <span class="s2">"
+"</span><span class="p">;</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+
+<p>Success response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"102341285566"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"total_budget"</span><span class="p">:</span><span class="w"> </span><span class="mi">25000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"total_cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">15566</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"daily_budget"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">1781</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"impression"</span><span class="p">:</span><span class="w"> </span><span class="mi">30254</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"click"</span><span class="p">:</span><span class="w"> </span><span class="mi">710</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"clickthrough_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.37</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"view"</span><span class="p">:</span><span class="w"> </span><span class="mi">1939</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"view_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.08</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"male"</span><span class="p">:</span><span class="w"> </span><span class="mi">198</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"female"</span><span class="p">:</span><span class="w"> </span><span class="mi">469</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"unknown"</span><span class="p">:</span><span class="w"> </span><span class="mi">1272</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"age_18_24"</span><span class="p">:</span><span class="w"> </span><span class="mi">322</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"age_25_34"</span><span class="p">:</span><span class="w"> </span><span class="mi">297</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"age_35_44"</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"age_45_54"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"age_55_64"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"age_65"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Failed response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ID is not found"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint deletes a specific order.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET https://api.solmate.cc/v2/orders/&lt;ID&gt;/reports</code></p>
+<h3 id='url-parameters-4'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the order</td>
+</tr>
+</tbody></table>
+<h3 id='get-parameters'>GET Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>report_type</td>
+<td>required</td>
+<td><code>hourly</code>, <code>daily</code></td>
+</tr>
+<tr>
+<td>start_at</td>
+<td>required</td>
+<td>We use UTC+8 with ISO 8601 formats like &#39;%Y-%m-%d %H:%M&#39;, <code>2019-05-12 14:00</code></td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-3'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Attribute Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of the order</td>
+</tr>
+<tr>
+<td>total_budget</td>
+<td>An amount that specify the maximum amount of budget spend over the period in which it runs.</td>
+</tr>
+<tr>
+<td>total_cost</td>
+<td>An amount that already spend over the period.</td>
+</tr>
+<tr>
+<td>daily_budget</td>
+<td>An amount that you set for each ad to spend each day.</td>
+</tr>
+<tr>
+<td>cost</td>
+<td>An amount that you already spent in a specific time.</td>
+</tr>
+<tr>
+<td>impression</td>
+<td>How many times your ads were shown to viewers.</td>
+</tr>
+<tr>
+<td>click</td>
+<td>Show you the number of times people clicked on your video.</td>
+</tr>
+<tr>
+<td>clickthrough_rate</td>
+<td>The number of clicks that your ad receives divided by the number of times your ad is shown.</td>
+</tr>
+<tr>
+<td>view</td>
+<td>Show the number of times people watched video ad.</td>
+</tr>
+<tr>
+<td>view_rate</td>
+<td>Show you the number of views divided by the number of times your ad is shown</td>
+</tr>
+<tr>
+<td>male</td>
+<td>How many male people watched video ad.</td>
+</tr>
+<tr>
+<td>female</td>
+<td>How many female people watched video ad.</td>
+</tr>
+<tr>
+<td>age_18_24</td>
+<td>How many people age between 18 ~ 24 watched video ad.</td>
+</tr>
+<tr>
+<td>age_25_34</td>
+<td>How many people age between 25 ~ 34 watched video ad.</td>
+</tr>
+<tr>
+<td>age_35_44</td>
+<td>How many people age between 35 ~ 44 watched video ad.</td>
+</tr>
+<tr>
+<td>age_45_54</td>
+<td>How many people age between 45 ~ 54 watched video ad.</td>
+</tr>
+<tr>
+<td>age_65</td>
+<td>How many people age over 65 watched video ad.</td>
+</tr>
+<tr>
+<td>25% view</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>50% view</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>75% view</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>100% view</td>
+<td>TBD</td>
 </tr>
 </tbody></table>
 <h2 id='update-order-status'>Update Order Status</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
@@ -1266,7 +1646,6 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
     <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">"Authorization"</span><span class="p">:</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
         <span class="s2">"Content-Type"</span><span class="p">:</span> <span class="s2">"application/json; charset=utf-8"</span><span class="p">,</span>
-        <span class="s2">"Cookie"</span><span class="p">:</span> <span class="s2">"__cfduid=d75037cf56267b659fb34c09ccac7009d1533181575"</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="na">contentType</span><span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>
     <span class="na">data</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
@@ -1283,6 +1662,29 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <span class="p">.</span><span class="nx">always</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="cm">/* ... */</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// Include Guzzle. If using Composer:
+// require 'vendor/autoload.php';
+</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Pool</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Psr7\Request</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span>
+        <span class="s2">"PUT"</span><span class="p">,</span>
+        <span class="s2">"https://api.solmate.cc/v2/orders/102341285566/status"</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">"Authorization"</span> <span class="o">=&gt;</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+            <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json; charset=utf-8"</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">"</span><span class="si">{</span><span class="nv">\"action\":\"pause\"</span><span class="si">}</span><span class="s2">"</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">"Response HTTP : "</span> <span class="o">.</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span> <span class="o">.</span> <span class="s2">"
+"</span><span class="p">;</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1301,9 +1703,9 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint deletes a specific order.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p><code>PUT https://api.solmate.cc/v2/orders/&lt;ID&gt;/status</code></p>
-<h3 id='url-parameters-4'>URL Parameters</h3>
+<h3 id='url-parameters-5'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1403,6 +1805,29 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <span class="p">.</span><span class="nx">always</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="cm">/* ... */</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// Include Guzzle. If using Composer:
+// require 'vendor/autoload.php';
+</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Pool</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Psr7\Request</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span>
+        <span class="s2">"DELETE"</span><span class="p">,</span>
+        <span class="s2">"https://api.solmate.cc/v2/orders/102341285566"</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">"Authorization"</span> <span class="o">=&gt;</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+            <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json; charset=utf-8"</span>
+        <span class="p">],</span>
+        <span class="s2">"{}"</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">"Response HTTP : "</span> <span class="o">.</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span> <span class="o">.</span> <span class="s2">"
+"</span><span class="p">;</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -1422,9 +1847,9 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint deletes a specific order.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
+<h3 id='http-request-7'>HTTP Request</h3>
 <p><code>DELETE https://api.solmate.cc/v2/orders/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-5'>URL Parameters</h3>
+<h3 id='url-parameters-6'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1485,6 +1910,10 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <tr>
 <td>daily_cost</td>
 <td>An amount that you already spent each day.</td>
+</tr>
+<tr>
+<td>hourly_cost</td>
+<td>A</td>
 </tr>
 <tr>
 <td>impression</td>
@@ -1605,6 +2034,7 @@ Solmate uses conventional HTTP response codes to indicate the success or failure
                 <a href="#" data-language-name="ruby">ruby</a>
                 <a href="#" data-language-name="python">python</a>
                 <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="php">php</a>
           </div>
       </div>
     </div>
