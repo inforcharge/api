@@ -229,6 +229,14 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
+            <a href="#stores" class="toc-h1 toc-link" data-title="Stores">Stores</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-stores-list" class="toc-h2 toc-link" data-title="Get Stores list">Get Stores list</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
               <ul class="toc-list-h2">
                   <li>
@@ -378,6 +386,189 @@ curl <span class="s2">"https://api.solmate.cc/v2/"</span> <span class="se">\</sp
 <aside class="notice">
 You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with your HTTP Basic Auth.
 </aside>
+<h1 id='stores'>Stores</h1><h2 id='get-stores-list'>Get Stores list</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'net/https'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="k">def</span> <span class="nf">send_request</span>
+  <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'https://api.solmate.cc/v2/stores'</span><span class="p">)</span>
+
+  <span class="c1"># Create client</span>
+  <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+  <span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_PEER</span>
+  <span class="n">dict</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">dict</span><span class="p">)</span>
+
+  <span class="c1"># Create Request</span>
+  <span class="n">req</span> <span class="o">=</span>  <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+  <span class="c1"># Add headers</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">add_field</span> <span class="s2">"Authorization"</span><span class="p">,</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span>
+  <span class="c1"># Add headers</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">add_field</span> <span class="s2">"Content-Type"</span><span class="p">,</span> <span class="s2">"application/json; charset=utf-8"</span>
+  <span class="c1"># Set body</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="n">body</span>
+
+  <span class="c1"># Fetch Request</span>
+  <span class="n">res</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Response HTTP Status Code: </span><span class="si">#{</span><span class="n">res</span><span class="p">.</span><span class="nf">code</span><span class="si">}</span><span class="s2">"</span>
+  <span class="nb">puts</span> <span class="s2">"Response HTTP Response Body: </span><span class="si">#{</span><span class="n">res</span><span class="p">.</span><span class="nf">body</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">rescue</span> <span class="no">StandardError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="nb">puts</span> <span class="s2">"HTTP Request failed (</span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="si">}</span><span class="s2">)"</span>
+<span class="k">end</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">def</span> <span class="nf">send_request</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">url</span><span class="o">=</span><span class="s">"https://api.solmate.cc/v2/stores"</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+                <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+                <span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json; charset=utf-8"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+
+            <span class="p">})</span>
+        <span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Status Code: {status_code}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">status_code</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Response Body: {content}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'HTTP Request failed'</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.solmate.cc/v2/stores"</span> <span class="se">\</span>
+     -H <span class="s1">'Content-Type: application/json; charset=utf-8'</span> <span class="se">\</span>
+     -u <span class="s1">'api@solmate.cc:Ilovesolmate'</span> <span class="se">\</span>
+     -d <span class="s1">$'{}'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="nx">jQuery</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s2">"https://api.solmate.cc/v2/stores"</span><span class="p">,</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"Authorization"</span><span class="p">:</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+        <span class="s2">"Content-Type"</span><span class="p">:</span> <span class="s2">"application/json; charset=utf-8"</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">jqXHR</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"HTTP Request Succeeded: "</span> <span class="o">+</span> <span class="nx">jqXHR</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">jqXHR</span><span class="p">,</span> <span class="nx">textStatus</span><span class="p">,</span> <span class="nx">errorThrown</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"HTTP Request Failed"</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">always</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="cm">/* ... */</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// Include Guzzle. If using Composer:
+// require 'vendor/autoload.php';
+</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Pool</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">GuzzleHttp\Psr7\Request</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span>
+        <span class="s2">"GET"</span><span class="p">,</span>
+        <span class="s2">"https://api.solmate.cc/v2/stores"</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="s2">"Authorization"</span> <span class="o">=&gt;</span> <span class="s2">"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</span><span class="p">,</span>
+            <span class="s2">"Content-Type"</span> <span class="o">=&gt;</span> <span class="s2">"application/json; charset=utf-8"</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">"{}"</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">"Response HTTP : "</span> <span class="o">.</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span> <span class="o">.</span> <span class="s2">"
+"</span><span class="p">;</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+
+<p>Success response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"stores"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"咖啡樹 Coffee Tree Bistro"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"106台北市大安區敦化南路一段187巷34號"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"live"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"area_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"大安區"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"district_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"台北忠孝東路"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"餐廳飲食"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"媽!有狗"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"106台北市大安區復興南路一段107巷25之2號"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"live"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"area_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"大安區"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"district_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"台北忠孝東路"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"餐廳飲食"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"next_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"prev_page"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"current_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Failed response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"store is not found"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint get store list.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.solmate.cc/v2/stores?page=2</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>you can get specific page of store list</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>stores</td>
+<td>stores list</td>
+</tr>
+<tr>
+<td>pagination.current_page</td>
+<td>Returns the number of the current page.</td>
+</tr>
+<tr>
+<td>pagination.next_page</td>
+<td>Returns the Next page number.</td>
+</tr>
+<tr>
+<td>pagination.prev_page</td>
+<td>Returns the Previous page number.</td>
+</tr>
+<tr>
+<td>pagination.total_pages</td>
+<td>Returns the total number of pages</td>
+</tr>
+</tbody></table>
 <h1 id='orders'>Orders</h1><h2 id='create-new-order'>Create new Order</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
 <span class="nb">require</span> <span class="s1">'net/https'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
@@ -565,7 +756,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint creates a new order.</p>
-<h3 id='http-request'>HTTP Request</h3>
+<h3 id='http-request-2'>HTTP Request</h3>
 <p><code>POST https://api.solmate.cc/v2/orders</code></p>
 <h3 id='post-parameters'>POST Parameters</h3>
 <table><thead>
@@ -832,9 +1023,9 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint update a specific order.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET https://api.solmate.cc/v2/orders/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -846,7 +1037,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <td>The ID of the order to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters'>Response Parameters</h3>
+<h3 id='response-parameters-2'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1088,9 +1279,9 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint update a specific order.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>PUT https://api.solmate.cc/v2/orders/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<h3 id='url-parameters-3'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1296,9 +1487,9 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint get a specific order status.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='http-request-5'>HTTP Request</h3>
 <p><code>GET https://api.solmate.cc/v2/orders/&lt;ID&gt;/status</code></p>
-<h3 id='url-parameters-3'>URL Parameters</h3>
+<h3 id='url-parameters-4'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1310,7 +1501,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <td>The ID of the order</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-2'>Response Parameters</h3>
+<h3 id='response-parameters-3'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1502,9 +1693,9 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint gets a report by specific time. We now temporarily support hourly report.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p><code>GET https://api.solmate.cc/v2/orders/&lt;ID&gt;/reports</code></p>
-<h3 id='url-parameters-4'>URL Parameters</h3>
+<h3 id='url-parameters-5'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1535,7 +1726,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <td>We use UTC+8 with ISO 8601 formats like &#39;%Y-%m-%d %H:%M&#39;, <code>2019-05-12 14:00</code></td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-3'>Response Parameters</h3>
+<h3 id='response-parameters-4'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th>Attribute Name</th>
@@ -1755,9 +1946,9 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint deletes a specific order.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
+<h3 id='http-request-7'>HTTP Request</h3>
 <p><code>PUT https://api.solmate.cc/v2/orders/&lt;ID&gt;/status</code></p>
-<h3 id='url-parameters-5'>URL Parameters</h3>
+<h3 id='url-parameters-6'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1899,9 +2090,9 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint deletes a specific order.</p>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h3 id='http-request-8'>HTTP Request</h3>
 <p><code>DELETE https://api.solmate.cc/v2/orders/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-6'>URL Parameters</h3>
+<h3 id='url-parameters-7'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
