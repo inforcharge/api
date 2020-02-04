@@ -403,6 +403,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
             <span class="s2">"display_time"</span> <span class="o">=&gt;</span> <span class="s2">"30"</span><span class="p">,</span>
             <span class="s2">"gender"</span> <span class="o">=&gt;</span> <span class="s2">""</span><span class="p">,</span>
             <span class="s2">"districts"</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">"台北信義市府"</span><span class="p">,</span> <span class="s2">"台北士林天母"</span><span class="p">],</span>
+            <span class="s2">"stores"</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'信義威秀'</span><span class="p">,</span> <span class="s1">'中和大潤發'</span><span class="p">,</span> <span class="s1">'天母大葉高島屋'</span><span class="p">],</span>
             <span class="s2">"hourly_notification"</span> <span class="o">=&gt;</span> <span class="s2">"https://notification.clickforce.com.tw/api/solmate"</span><span class="p">,</span>
             <span class="s2">"daily_notification"</span> <span class="o">=&gt;</span> <span class="s2">""</span><span class="p">,</span>
         <span class="p">}</span>
@@ -451,6 +452,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
                 <span class="s">"display_time"</span><span class="p">:</span> <span class="s">"30"</span><span class="p">,</span>
                 <span class="s">"gender"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
                 <span class="s">"districts"</span><span class="p">:</span> <span class="p">[</span><span class="s">"台北信義市府"</span><span class="p">,</span> <span class="s">"台北士林天母"</span><span class="p">],</span>
+                <span class="s">"stores"</span><span class="p">:</span> <span class="p">[</span><span class="s">'信義威秀'</span><span class="p">,</span> <span class="s">'中和大潤發'</span><span class="p">,</span> <span class="s">'天母大葉高島屋'</span><span class="p">],</span>
                 <span class="s">"hourly_notification"</span><span class="p">:</span> <span class="s">"https://notification.clickforce.com.tw/api/solmate"</span><span class="p">,</span>
                 <span class="s">"daily_notification"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
             <span class="p">})</span>
@@ -480,6 +482,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
   "display_time": "30",
   "gender": "",
   "districts": ["台北信義市府", "台北士林天母"],
+  "stores": ["信義威秀", "中和大潤發", "天母大葉高島屋"],
   "hourly_notification": "https://notification.clickforce.com.tw/api/solmate",
   "daily_notification": "",
 }'</span>
@@ -506,6 +509,7 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
         <span class="s2">"display_time"</span><span class="p">:</span> <span class="s2">"30"</span><span class="p">,</span>
         <span class="s2">"gender"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
         <span class="s2">"districts"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"台北信義市府"</span><span class="p">,</span> <span class="s2">"台北士林天母"</span><span class="p">],</span>
+        <span class="s2">"stores"</span><span class="p">:</span> <span class="p">[</span><span class="s1">'信義威秀'</span><span class="p">,</span> <span class="s1">'中和大潤發'</span><span class="p">,</span> <span class="s1">'天母大葉高島屋'</span><span class="p">],</span>
         <span class="s2">"hourly_notification"</span><span class="p">:</span> <span class="s2">"https://notification.clickforce.com.tw/api/solmate"</span><span class="p">,</span>
         <span class="s2">"daily_notification"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
     <span class="p">})</span>
@@ -635,6 +639,11 @@ You must replace <code>"Basic YXBpQHNvbG1hdGUuY2M6SWxvdmVzb2xtYXRl"</code> with 
 <td>gender</td>
 <td>optional</td>
 <td>Empty string is no limit. <code>male</code>, <code>female</code></td>
+</tr>
+<tr>
+<td>stores</td>
+<td>optional</td>
+<td>Empty string is no limit. You could get store list from other API.</td>
 </tr>
 <tr>
 <td>districts</td>
